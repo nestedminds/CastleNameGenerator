@@ -1,8 +1,10 @@
 <?php
 
-class Cli_Model_CastleGenerator
+namespace Castle;
+
+class CastleGenerator
 {
-  private $firstCastleName = array("Dragonspire", "Redmont", "Farrador", "Dannamore", "Windamere", "Braewood", "Perrigwyn", "Cantlyn", "Tessaway", "Brawnlyn", "Aeskrow", "Balling", "Boltan", "Boltangate", "Caestshire", "Celnaer", "Slyborn", "Calbridge",
+    private $firstCastleName = ["Dragonspire", "Redmont", "Farrador", "Dannamore", "Windamere", "Braewood", "Perrigwyn", "Cantlyn", "Tessaway", "Brawnlyn", "Aeskrow", "Balling", "Boltan", "Boltangate", "Caestshire", "Celnaer", "Slyborn", "Calbridge",
    "Dewmire", "Craester Arms", "Croglang", "Darton", "Darenby", "Dunstead", "Shardore", "Goodmond", "Salkire",
   "Hordrigg", "Hopeshire", "Haerton", "Cullin", "Murton", "Iredale", "Cornby", "Croilton", "Kirkoswald", "Levans", "Little Cardle", "Carderby", "Ormshire", "Dockerly", "Pierceton", "Crandalholme", "Faerchester", "Sella", "Skelside", "Selsmire", "Staerdale", "Direwood", "Waernell", "Worthwood", "Wilton",
   "Bellbroke", "Brivey", "Breuce", "Ashington", "Haword", "Clifton", "Highcalere", "Mireworth", "New Wandour", "Bornesher", "Werth", "Wishborne", "Arcton",
@@ -25,40 +27,37 @@ class Cli_Model_CastleGenerator
           "Kalepeck", "Langen", "Lyonhall", "Mercle", "Arcop", "Fernyard", "Stappleton", "Warcton", "Burmstone", "Barmpton", "Calford", "Croft", "Dawnton", "Goulrich", "Cannersly", "Permbridge", "Stonehill", "Wintershold", "Windkeep", "Archdale", "Treehold", "Summerswind", "Ultrona", "Langdale", "Longdale",
           "Bruckstone", "Euthoria", "Azgul", "Stormholme", "Riverdale", "Ulentor", "Mirador", "Bundor", "Gandum", "Mandoom", "Daroonga", "Grimtol", "Gumtar", "Muria", "Maelony", "Galadhor", "Gundor", "Logoria", "Taergoria", "Whitmore", "Warlton", "Arnstey", "Berlington", "Starford", "Parlton",
            "Tharfield", "Windmontley", "Barkhamsted", "East Lowes", "West Lowes", "Curlisbrooke", "Narris", "Yarlmouth", "Cormwell", "Minbury", "Brancheley", "Falkerstone", "Queensborough", "Stowerling", "Tharnham", "Earlington", "Calterburry", "Chirlingstone", "Charhelm", "Eynsworth", "Leyebourne", "Saltwood", "Raychester", "Sarsinghurst", "Tornbridge",
-            "Alnor", "Waelmore");
-  private $secondCastleName = array("Castle", "Keep", "Hold", "Palace", "Fort", "Stronghold", "Citadel", "Fortress");
+            "Alnor", "Waelmore"];
+
+    private $secondCastleName = ["Castle", "Keep", "Hold", "Palace", "Fort", "Stronghold", "Citadel", "Fortress"];
 
 
-private $_firstCastleNameLength;
-private $_secondCastleNameLength ;
+    private $_firstCastleNameLength;
+
+    private $_secondCastleNameLength;
 
 
-public function __construct()
-{
-  $this-> _firstCastleNameLength = count($this->firstCastleName );
-  $this-> _secondCastleNameLength = count($this->secondCastleName);
+    public function __construct()
+    {
+        $this-> _firstCastleNameLength = count($this->firstCastleName);
+        $this-> _secondCastleNameLength = count($this->secondCastleName);
+    }
 
-}
+    public function generateCastleName()
+    {
+        $firstGeneratedNumber = mt_rand(0, $this->_firstCastleNameLength);
+        $secondGeneratedNumber = mt_rand(0, $this->_secondCastleNameLength);
 
+        if ($firstGeneratedNumber === $this->_firstCastleNameLength) {
+            $firstGeneratedNumber--;
+        }
 
+        if ($secondGeneratedNumber === $this->_secondCastleNameLength) {
+            $secondGeneratedNumber--;
+        }
 
-public function generateCastleName()
-{
-  $firstGeneratedNumber = mt_rand(0, $this->_firstCastleNameLength);
-  $secondGeneratedNumber = mt_rand(0, $this->_secondCastleNameLength);
+        $name = ucfirst($this->firstCastleName[$firstGeneratedNumber] . ' ' . $this->secondCastleName[$secondGeneratedNumber]);
 
-if ($firstGeneratedNumber == $this->_firstCastleNameLength) {
-  $firstGeneratedNumber--;
-}
-
-if ($secondGeneratedNumber == $this->_secondCastleNameLength) {
-  $secondGeneratedNumber--;
-}
-
-$name = ucfirst($this->firstCastleName[$firstGeneratedNumber] .  " " . $this->secondCastleName[$secondGeneratedNumber]);
-
-
-return $name;
-}
-
+        return $name;
+    }
 }
